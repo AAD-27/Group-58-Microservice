@@ -9,6 +9,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1")
 public class RideHailingController {
+
     @Autowired
     private RiderService riderService;
 
