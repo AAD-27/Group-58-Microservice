@@ -9,6 +9,7 @@ import java.util.List;
 @Service
 public class RiderService {
     public List<RiderResponseDTO> getAllRiders() {
+
         return RiderBO.getAllRiders();
     }
 }
