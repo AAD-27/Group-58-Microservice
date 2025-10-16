@@ -1,22 +1,45 @@
 package com.bits.ride.hailing.bo;
 
 import com.bits.ride.hailing.dto.RiderResponseDTO;
-import java.util.Arrays;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class RiderBO {
+    private static final Logger logger = Logger.getLogger(RiderBO.class.getName());
+
     public static List<RiderResponseDTO> getAllRiders() {
-        RiderResponseDTO r1 = new RiderResponseDTO();
-        r1.setId(1L); r1.setName("Alice"); r1.setEmail("alice@example.com"); r1.setPhone("1234567890");
-        RiderResponseDTO r2 = new RiderResponseDTO();
-        r2.setId(2L); r2.setName("Bob"); r2.setEmail("bob@example.com"); r2.setPhone("2345678901");
-        RiderResponseDTO r3 = new RiderResponseDTO();
-        r3.setId(3L); r3.setName("Charlie"); r3.setEmail("charlie@example.com"); r3.setPhone("3456789012");
-        RiderResponseDTO r4 = new RiderResponseDTO();
-        r4.setId(4L); r4.setName("David"); r4.setEmail("david@example.com"); r4.setPhone("4567890123");
-        RiderResponseDTO r5 = new RiderResponseDTO();
-        r5.setId(5L); r5.setName("Eve"); r5.setEmail("eve@example.com"); r5.setPhone("5678901234");
-        return Arrays.asList(r1, r2, r3, r4, r5);
+        List<RiderResponseDTO> riders = new ArrayList<>();
+        String filePath = "src/main/resources/riders.csv";
+
+        logger.info("Attempting to read riders.csv file from path: " + filePath);
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            boolean isHeader = true;
+            while ((line = br.readLine()) != null) {
+                if (isHeader) {
+                    isHeader = false;
+                    continue;
+                }
+                String[] values = line.split(",");
+                RiderResponseDTO rider = new RiderResponseDTO();
+                rider.setId(Long.parseLong(values[0]));
+                rider.setName(values[1]);
+                rider.setEmail(values[2]);
+                rider.setPhone(values[3]);
+                riders.add(rider);
+                logger.info("Successfully added rider: " + rider);
+            }
+        } catch (IOException e) {
+            logger.severe("Error reading riders.csv file: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        logger.info("Total riders loaded: " + riders.size());
+        return riders;
     }
 }
-
