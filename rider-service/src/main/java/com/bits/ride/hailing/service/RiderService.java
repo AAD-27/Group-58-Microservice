@@ -11,3 +11,4 @@ public interface RiderService {
     User getUser(Long id);
 
 }
+

@@ -22,8 +22,12 @@ public class RiderServiceImpl implements RiderService {
 
     private static final Logger logger = Logger.getLogger(RiderServiceImpl.class.getName());
 
-    @Autowired(required = false)
     private RiderRepository riderRepository; // optional until DB configured
+
+    @Autowired(required = false)
+    public RiderServiceImpl(RiderRepository riderRepository) {
+        this.riderRepository = riderRepository;
+    }
 
     @Override
     public User getUser(Long id) {
@@ -146,3 +150,4 @@ public class RiderServiceImpl implements RiderService {
     }
 
 }
+
