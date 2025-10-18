@@ -2,7 +2,10 @@ package com.bits.ride.hailing.service;
 
 import com.bits.ride.hailing.dto.RiderResponseDTO;
 import com.bits.ride.hailing.entity.User;
+import com.bits.ride.hailing.entity.RiderEntity;
+import com.bits.ride.hailing.repository.RiderRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -18,6 +21,9 @@ import java.util.logging.Logger;
 public class RiderServiceImpl implements RiderService {
 
     private static final Logger logger = Logger.getLogger(RiderServiceImpl.class.getName());
+
+    @Autowired(required = false)
+    private RiderRepository riderRepository; // optional until DB configured
 
     @Override
     public User getUser(Long id) {
@@ -50,6 +56,30 @@ public class RiderServiceImpl implements RiderService {
         return loadAllRiders();
     }
 
+    // helper: load from DB using JPA (not used yet; kept for future switch)
+    private List<RiderResponseDTO> loadAllRidersFromDb() {
+        List<RiderResponseDTO> list = new ArrayList<>();
+        try {
+            if (riderRepository == null) {
+                return list;
+            }
+            List<RiderEntity> entities = riderRepository.findAll();
+            for (RiderEntity e : entities) {
+                RiderResponseDTO dto = new RiderResponseDTO();
+                dto.setId(e.getId());
+                dto.setName(e.getName());
+                dto.setEmail(e.getEmail());
+                dto.setPhone(e.getPhone());
+                dto.setCreatedAt(e.getCreatedAt());
+                list.add(dto);
+            }
+        } catch (Exception ex) {
+            logger.fine("DB load skipped or failed: " + ex.getMessage());
+        }
+        return list;
+    }
+
+    // --- CSV loading logic moved from RiderBO ---
     private List<RiderResponseDTO> loadAllRiders() {
         List<RiderResponseDTO> riders = new ArrayList<>();
         String filePath = "src/main/resources/riders.csv";
