@@ -1,11 +1,11 @@
-package com.bits.ride.hailing.dto;
+package com.bits.ride.hailing.entity;
 
 import lombok.Data;
 
 import java.sql.Timestamp;
 
 @Data
-public class RiderResponseDTO {
+public class User {
     private Long id;
     private String name;
     private String email;
