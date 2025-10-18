@@ -1,8 +1,9 @@
 package com.bits.ride.hailing.controller;
 
 import com.bits.ride.hailing.dto.RiderResponseDTO;
+import com.bits.ride.hailing.entity.User;
 import com.bits.ride.hailing.service.RiderService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -10,13 +11,27 @@ import java.util.List;
 @RequestMapping("/v1")
 public class RideHailingController {
 
-    @Autowired
-    private RiderService riderService;
+    private final RiderService riderService;
+
+    // constructor injection is preferred and plays nicer with tests and IDE inspections
+    public RideHailingController(RiderService riderService) {
+        this.riderService = riderService;
+    }
+
 
     @GetMapping("/riders")
-    public List<RiderResponseDTO> getAllRiders() {
-        return riderService.getAllRiders();
+    public ResponseEntity<List<RiderResponseDTO>> getAllRiders() {
+        List<RiderResponseDTO> riders = riderService.getAllRiders();
+        return ResponseEntity.ok(riders);
+    }
+
+    @GetMapping("/riders/{id}")
+    public ResponseEntity<User> getUser(@PathVariable("id") Long id) {
+        User user = riderService.getUser(id);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(user);
     }
 
 }
-
