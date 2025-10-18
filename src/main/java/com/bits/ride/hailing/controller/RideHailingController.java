@@ -10,12 +10,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1")
 public class RideHailingController {
+
     private final RiderService riderService;
 
     // constructor injection is preferred and plays nicer with tests and IDE inspections
     public RideHailingController(RiderService riderService) {
         this.riderService = riderService;
     }
+
 
     @GetMapping("/riders")
     public ResponseEntity<List<RiderResponseDTO>> getAllRiders() {
