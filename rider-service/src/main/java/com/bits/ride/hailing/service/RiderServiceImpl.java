@@ -16,18 +16,14 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-
+import com.bits.ride.hailing.service.RiderService;
 @Service
 public class RiderServiceImpl implements RiderService {
 
     private static final Logger logger = Logger.getLogger(RiderServiceImpl.class.getName());
 
-    private RiderRepository riderRepository; // optional until DB configured
-
     @Autowired(required = false)
-    public RiderServiceImpl(RiderRepository riderRepository) {
-        this.riderRepository = riderRepository;
-    }
+    private RiderRepository riderRepository; // optional until DB configured
 
     @Override
     public User getUser(Long id) {
@@ -83,7 +79,7 @@ public class RiderServiceImpl implements RiderService {
         return list;
     }
 
-    // --- CSV loading logic moved from RiderBO ---
+    // --- CSV loading logic ---
     private List<RiderResponseDTO> loadAllRiders() {
         List<RiderResponseDTO> riders = new ArrayList<>();
         String filePath = "src/main/resources/riders.csv";
@@ -150,4 +146,3 @@ public class RiderServiceImpl implements RiderService {
     }
 
 }
-
