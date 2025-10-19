@@ -1,0 +1,15 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /driver-service
+
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+
+logging:
+  level:
+    root: INFO
+
