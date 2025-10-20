@@ -70,7 +70,7 @@ CREATE TABLE ratings (
 
 -- 4️⃣ Load CSVs into tables
 -- Adjust path if needed (absolute or relative to MySQL server)
-LOAD DATA LOCAL INFILE 'C:/Users/veron/Documents/Group-58-Microservice/seed/rhfd_drivers.csv'
+LOAD DATA LOCAL INFILE 'D:/Ameya/BITS/SS Assigment 1/Group 58 Microservice/Group-58-Microservice/seed/rhfd_drivers.csv'
 INTO TABLE drivers
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"' 
@@ -78,7 +78,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (id, name, phone, vehicle_type, vehicle_plate, is_active);
 
-LOAD DATA LOCAL INFILE 'C:/Users/veron/Documents/Group-58-Microservice/seed/rhfd_riders.csv'
+LOAD DATA LOCAL INFILE 'D:/Ameya/BITS/SS Assigment 1/Group 58 Microservice/Group-58-Microservice/seed/rhfd_riders.csv'
 INTO TABLE riders
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"' 
@@ -86,7 +86,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (id, name, email, phone, created_at);
 
-LOAD DATA LOCAL INFILE 'C:/Users/veron/Documents/Group-58-Microservice/seed/rhfd_trips.csv'
+LOAD DATA LOCAL INFILE 'D:/Ameya/BITS/SS Assigment 1/Group 58 Microservice/Group-58-Microservice/seed/rhfd_trips.csv'
 INTO TABLE trips
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"' 
@@ -94,7 +94,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (id, rider_id, driver_id, pickup_zone, drop_zone, status, requested_at, distance_km, base_fare, surge_multiplier, total_fare);
 
-LOAD DATA LOCAL INFILE 'C:/Users/veron/Documents/Group-58-Microservice/seed/rhfd_payments.csv'
+LOAD DATA LOCAL INFILE 'D:/Ameya/BITS/SS Assigment 1/Group 58 Microservice/Group-58-Microservice/seed/rhfd_payments.csv'
 INTO TABLE payments
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"' 
@@ -102,7 +102,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (id, trip_id, amount, method, status, reference, created_at);
 
-LOAD DATA LOCAL INFILE 'C:/Users/veron/Documents/Group-58-Microservice/seed/rhfd_ratings.csv'
+LOAD DATA LOCAL INFILE 'D:/Ameya/BITS/SS Assigment 1/Group 58 Microservice/Group-58-Microservice/seed/rhfd_ratings.csv'
 INTO TABLE ratings
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"' 

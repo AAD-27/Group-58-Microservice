@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @Table(name = "riders")
 public class RiderEntity {
     @Id
-    @Column(name = "rider_id")
+    @Column(name = "id")
     private Long id;
 
     private String name;
