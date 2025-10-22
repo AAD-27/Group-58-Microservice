@@ -1,7 +1,16 @@
 package com.bits.ride.hailing.ridersvc.dto;
 
+import lombok.Data;
+
 import java.sql.Timestamp;
 
+/**
+ * Response DTO used internally by the ridersvc package to represent rider data.
+ *
+ * <p>This is a plain POJO with JavaBean getters and setters to avoid Lombok
+ * dependencies in some internal modules.
+ */
+@Data
 public class RiderResponseDTO {
     private Long id;
     private String name;
@@ -9,15 +18,4 @@ public class RiderResponseDTO {
     private String phone;
     private Timestamp createdAt;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
-    public String getPhone() { return phone; }
-    public void setPhone(String phone) { this.phone = phone; }
-    public Timestamp getCreatedAt() { return createdAt; }
-    public void setCreatedAt(Timestamp createdAt) { this.createdAt = createdAt; }
 }
-
