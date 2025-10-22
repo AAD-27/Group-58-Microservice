@@ -8,12 +8,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Timestamp;
 
+/**
+ * JPA entity representing a rider stored in the database.
+ *
+ * <p>Maps to the "riders" table and contains basic contact information and a
+ * created timestamp.
+ */
 @Data
 @Entity
 @Table(name = "riders")
 public class RiderEntity {
     @Id
-    @Column(name = "rider_id")
+    @Column(name = "id")
     private Long id;
 
     private String name;
@@ -23,4 +29,3 @@ public class RiderEntity {
     @Column(name = "created_at")
     private Timestamp createdAt;
 }
-
