@@ -47,7 +47,6 @@ public class RiderServiceImpl implements RiderService {
         final String method = "getUser";
         logger.info("Start of {}: {}() - id={}", CLASS_NAME, method, id);
         if (id == null) {
-            logger.debug("{}#{} called with null id", CLASS_NAME, method);
             logger.info("End of {}: {}() - id={} - resultFound={}", CLASS_NAME, method, id, false);
             return null;
         }
@@ -85,7 +84,6 @@ public class RiderServiceImpl implements RiderService {
         final String method = "getAllRiders";
         logger.info("Start of {}: {}()", CLASS_NAME, method);
         try {
-            logger.debug("{}#{} - Querying RiderRepository.findAll", CLASS_NAME, method);
             List<RiderEntity> entities = riderRepository.findAll();
             List<RiderResponseDTO> list = new ArrayList<>();
             for (RiderEntity e : entities) {

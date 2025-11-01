@@ -1,0 +1,11 @@
+com\bits\ride\hailing\repository\RiderRepository.class
+com\bits\ride\hailing\rider\controller\RiderController.class
+com\bits\ride\hailing\entity\RiderEntity.class
+com\bits\ride\hailing\ridersvc\dto\RiderResponseDTO.class
+com\bits\ride\hailing\ridersvc\dto\RiderRequestDTO.class
+com\bits\ride\hailing\dto\RiderResponseDTO.class
+com\bits\ride\hailing\service\RiderService.class
+com\bits\ride\hailing\entity\User.class
+com\bits\ride\hailing\service\RiderServiceImpl.class
+com\bits\ride\hailing\RiderServiceApplication.class
+com\bits\ride\hailing\dto\RiderRequestDTO.class
