@@ -23,6 +23,7 @@ import org.slf4j.LoggerFactory;
  * </ul>
  *
  * This controller delegates business logic to a {@link RiderService}.
+ * http://localhost:8081/ride-hailing/rider-service/v1/riders
  */
 @RestController
 @RequestMapping("/rider-service")
@@ -56,9 +57,7 @@ public class RiderController {
     public ResponseEntity<List<RiderResponseDTO>> getAllRiders() {
         final String method = "getAllRiders";
         logger.info("Start of {}: {}()", CLASS_NAME, method);
-        logger.debug("{}#{} - Handling request: GET /v1/riders - delegating to RiderService.getAllRiders", CLASS_NAME, method);
         List<RiderResponseDTO> all = riderService.getAllRiders();
-        logger.debug("{}#{} - RiderService.getAllRiders returned {} entries", CLASS_NAME, method, all == null ? 0 : all.size());
         logger.info("End of {}: {}() - count={}", CLASS_NAME, method, all == null ? 0 : all.size());
         return ResponseEntity.ok(all);
     }
