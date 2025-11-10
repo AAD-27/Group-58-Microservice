@@ -8,12 +8,20 @@ import { TripSchema } from "src/schema/trip.schema";
 import { Rating } from "src/models/rating.model";
 import { CreateTripDto } from "./dto/create-trip.dto";
 import { Sequelize } from "sequelize-typescript";
+import { InjectMetric } from "@willsoto/nestjs-prometheus";
+import { Counter } from "prom-client";
 
 @Injectable()
 export class TripService {
   constructor(
     private readonly tripRepository: TripRepository,
-    @Inject("SEQUELIZE") private readonly sequelize: Sequelize
+    @Inject("SEQUELIZE") private readonly sequelize: Sequelize,
+    @InjectMetric("trips_requested_total")
+    private readonly tripsRequested: Counter<string>,
+    @InjectMetric("trips_completed_total")
+    private readonly tripsCompleted: Counter<string>,
+    @InjectMetric("trips_cancelled_total")
+    private readonly tripsCancelled: Counter<string>
   ) {}
 
   private convertTripRecordToSchema(data: Trip): TripSchema {
@@ -71,6 +79,7 @@ export class TripService {
         options: { transaction },
       });
       await transaction.commit();
+      this.tripsRequested.inc();
       return trip;
     } catch (error) {
       await transaction.rollback();
@@ -121,6 +130,7 @@ export class TripService {
         options: { transaction },
       });
       await transaction.commit();
+      this.tripsCompleted.inc();
       return { message: "Trip completed successfully" };
     } catch (error) {
       await transaction.rollback();
@@ -150,6 +160,7 @@ export class TripService {
         options: { transaction },
       });
       await transaction.commit();
+      this.tripsCancelled.inc();
       return { message: "Trip cancelled successfully" };
     } catch (error) {
       await transaction.rollback();
